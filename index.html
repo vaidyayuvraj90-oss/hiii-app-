@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pocket PPTX Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- JSZip to unpack .pptx files directly on the phone -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+  <!-- Top App Bar (PowerPoint Orange Theme) -->
+  <header class="app-bar">
+    <div class="brand">
+      <span class="logo-icon">📊</span>
+      <h1>Pocket PPT Viewer</h1>
+    </div>
+    <label for="pptx-upload" class="upload-btn">
+      📂 Open .PPTX
+    </label>
+    <input type="file" id="pptx-upload" accept=".pptx" hidden />
+  </header>
+
+  <!-- Main Slide Stage -->
+  <main class="stage-container">
+    <div id="empty-state" class="empty-state">
+      <div class="empty-card">
+        <div class="big-icon">📑</div>
+        <h2>Open a PowerPoint File</h2>
+        <p>Tap <strong>"Open .PPTX"</strong> above to pick any presentation from your phone storage, or load a sample presentation to test right now.</p>
+        <button id="demo-btn" class="primary-btn">✨ Load Demo Presentation</button>
+      </div>
+    </div>
+
+    <div id="slide-workspace" class="slide-workspace hidden">
+      <div class="file-info-bar">
+        <span id="file-name-label">Presentation.pptx</span>
+        <span id="slide-counter-badge">Slide 1 / 1</span>
+      </div>
+
+      <!-- 16:9 Slide Canvas -->
+      <div id="slide-viewport" class="slide-viewport">
+        <div id="slide-canvas" class="slide-canvas"></div>
+      </div>
+
+      <!-- Thumbnail Filmstrip -->
+      <div id="thumbnail-strip" class="thumbnail-strip"></div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation Controls -->
+  <footer id="bottom-nav" class="bottom-nav hidden">
+    <button id="prev-btn" class="nav-btn">⬅️ Prev</button>
+    <button id="fullscreen-btn" class="nav-btn accent">🖥️ Present</button>
+    <button id="next-btn" class="nav-btn">Next ➡️</button>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

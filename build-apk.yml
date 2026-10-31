@@ -1,0 +1,46 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 3. Set up Java JDK 17 (Required for Android Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: 4. Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 5. Install Dependencies & Generate Capacitor Android Project
+        run: |
+          npm install
+          npx cap add android
+          npx cap sync android
+
+      - name: 6. Compile Installable Android APK with Gradle
+        working-directory: ./android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: 7. Upload Ready-to-Install APK to GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pocket-PPT-Viewer-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk

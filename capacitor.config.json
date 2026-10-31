@@ -1,0 +1,6 @@
+{
+  "appId": "com.pocketppt.viewer",
+  "appName": "Pocket PPT Viewer",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
